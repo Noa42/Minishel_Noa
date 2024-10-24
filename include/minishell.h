@@ -22,6 +22,7 @@ typedef struct s_data
     char    **env;
 	char	*input;
     char    **array_input;
+    char    **array_var;
 }			t_data;
 
 // SIGNALS
@@ -34,9 +35,19 @@ void parsing(t_data *data);
 // UTILS
 void		print_array(char **array);
 void		free_array(char **array);
+char **copy_alloc_array(char **array);
+int array_len(char **array);
 
 // EXECUTION
 void execution (t_data *data);
+void ft_pwd(void);
+void ft_echo(char **array_input);
+void builtins(t_data *data);
+void ft_cd(t_data *data);
+void ft_env(t_data *data);
+void ft_export(t_data *data);
+void insert_var(char **array, char *var_name, char *var_value);
+
 
 // PATH
 char		*get_path_line(char **env);

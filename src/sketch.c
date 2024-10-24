@@ -24,8 +24,9 @@ void	history(char *input)
 
 void	init_data(t_data *data, char **env)
 {
-	data->env = env;
+	data->env = copy_alloc_array(env);
 	//print_array(data->env);
+	data->array_var = copy_alloc_array(env);
 	data->input = NULL;
 	data->array_input = NULL;
 }
@@ -44,7 +45,7 @@ int	main(int argc, char** argv, char **env)
 	while (1)
 	{
 		data.input = readline("MiniShell> ");
-		if (data.input == NULL || strcmp(data.input, "exit") == 0)
+		if (data.input == NULL || ft_strncmp(data.input, "exit", ft_strlen(data.input)) == 0)
 			break ;
 		history(data.input);
 		printf("Leído: %s\n", data.input);
