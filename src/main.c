@@ -25,10 +25,12 @@ void	history(char *input)
 void	init_data(t_data *data, char **env)
 {
 	data->env = copy_alloc_array(env);
-	//print_array(data->env);
 	data->array_var = copy_alloc_array(env);
+	sort_strings(data->array_var, array_len(data->array_var));
 	data->input = NULL;
 	data->array_input = NULL;
+	data-> exit_status = 0;
+	data->token_list = NULL;
 }
 void    free_data(t_data *data)
 {
@@ -45,9 +47,14 @@ int	main(int argc, char** argv, char **env)
 	while (1)
 	{
 		data.input = readline("MiniShell> ");
-		if (data.input == NULL || ft_strncmp(data.input, "exit", ft_strlen(data.input)) == 0)
+		if (data.input == NULL || ft_strcmp(data.input, "exit") == 0)
 			break ;
+		if(strcmp(data.input, "listas") == 0)
+			listas(&data);
+		if(strcmp(data.input, "arrays") == 0)
+			arrays(&data);
 		history(data.input);
+		printf("---------------------\n");
 		printf("Leído: %s\n", data.input);
 		parsing(&data);
 		execution(&data);
